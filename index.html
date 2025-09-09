@@ -18,8 +18,19 @@
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4 text-white">
 
+    <!-- Schermata di benvenuto con password -->
+    <div id="welcome-screen" class="flex flex-col items-center justify-center space-y-8 text-center min-h-screen">
+        <h1 class="text-6xl md:text-8xl bangers-font text-yellow-300 drop-shadow-lg">Games and Research</h1>
+        <div class="space-y-4">
+            <input type="password" id="password-input" placeholder="Enter password" class="p-2 w-full max-w-sm text-center rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-500">
+            <button id="access-btn" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
+                Proceed
+            </button>
+        </div>
+    </div>
+
     <!-- Start screen -->
-    <div id="start-screen" class="flex flex-col items-center justify-center space-y-8 text-center">
+    <div id="start-screen" class="hidden flex-col items-center justify-center space-y-8 text-center">
         <h1 class="text-6xl md:text-8xl bangers-font text-yellow-300 drop-shadow-lg">PUERTO BANANA</h1>
         <p class="text-xl md:text-2xl max-w-2xl font-semibold">
             Welcome to Puerto Banana! The docks are full of bananas and your goal is to load your ship to have more bananas than your opponents. Be shrewd and win the auctions!
@@ -33,6 +44,7 @@
                 Next
             </button>
         </div>
+        <p class="text-sm mt-4 text-gray-300">This website is non-profit and used for research purposes only.</p>
     </div>
 
     <!-- Name input screen -->
@@ -41,9 +53,14 @@
         <div id="name-inputs" class="w-full space-y-4">
             <!-- Inputs will be inserted here by JavaScript -->
         </div>
-        <button id="start-game-btn" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
-            Start game
-        </button>
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <button id="back-btn" class="px-6 py-3 bg-gray-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-gray-500 transition-colors duration-200">
+                Back
+            </button>
+            <button id="start-game-btn" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
+                Start game
+            </button>
+        </div>
     </div>
 
     <!-- Game screen -->
@@ -116,13 +133,17 @@
             let bids = [];
             let playerTurnIndex = 0;
             const history = [];
-            // Variabile non più necessaria, ora il valore viene letto direttamente dall'input.
+            const password = "200bananas"; // Password fissa
 
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const passwordInput = document.getElementById('password-input');
+            const accessBtn = document.getElementById('access-btn');
             const startScreen = document.getElementById('start-screen');
             const nameInputScreen = document.getElementById('name-input-screen');
             const gameScreen = document.getElementById('game-screen');
             const endScreen = document.getElementById('end-screen');
             const nextStepBtn = document.getElementById('next-step-btn');
+            const backBtn = document.getElementById('back-btn'); // Nuovo pulsante
             const startGameBtn = document.getElementById('start-game-btn');
             const playerCountInput = document.getElementById('player-count');
             const nameInputsContainer = document.getElementById('name-inputs');
@@ -168,10 +189,14 @@
                 }
             };
 
-            const showModal = (title, message) => {
+            const showModal = (title, message, callback) => {
                 modalTitle.textContent = title;
                 modalMessage.textContent = message;
                 gameMessageModal.classList.remove('hidden');
+                modalBtn.onclick = () => {
+                    hideModal();
+                    if (callback) callback();
+                };
             };
 
             const hideModal = () => {
@@ -179,7 +204,7 @@
             };
 
             const showScreen = (screenId) => {
-                [startScreen, nameInputScreen, gameScreen, endScreen].forEach(screen => {
+                [welcomeScreen, startScreen, nameInputScreen, gameScreen, endScreen].forEach(screen => {
                     screen.classList.add('hidden');
                 });
                 document.getElementById(screenId).classList.remove('hidden');
@@ -260,20 +285,16 @@
                 const bananasForAuction = parseInt(bananasForAuctionEl.textContent);
                 let message = '';
                 
-                // Filter for valid bids (greater than 0)
-                let currentBids = bids.filter(b => b.bid > 0);
+                // Now considers bids >= 0 as valid
+                let currentBids = bids.filter(b => b.bid >= 0);
                 
                 // Sort bids from highest to lowest
                 currentBids.sort((a, b) => b.bid - a.bid);
                 
-                // If there are no valid bids, the round ends
+                // If all bids were invalid (e.g., negative, though the input prevents it)
                 if (currentBids.length === 0) {
-                    message = "No bids this round. Bananas were not assigned.";
-                    showModal('Round Results', message);
-                    modalBtn.onclick = () => {
-                        hideModal();
-                        checkEndGame();
-                    };
+                    message = "No valid bids this round. Bananas were not assigned.";
+                    showModal('Round Results', message, checkEndGame);
                     return;
                 }
                 
@@ -359,11 +380,7 @@
                 });
                 saveState();
 
-                showModal('Round Results', roundMessage);
-                modalBtn.onclick = () => {
-                    hideModal();
-                    checkEndGame();
-                };
+                showModal('Round Results', roundMessage, checkEndGame);
             };
 
 
@@ -423,6 +440,27 @@
                 document.body.removeChild(link);
             };
 
+            // Listener per il pulsante di accesso
+            accessBtn.addEventListener('click', () => {
+                if (passwordInput.value === password) {
+                    showScreen('start-screen');
+                } else {
+                    showModal('Error', 'Incorrect password. Please try again.', () => {
+                        passwordInput.value = '';
+                        passwordInput.focus();
+                    });
+                }
+            });
+
+            // Listener per il tasto Invio nell'input della password
+            passwordInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    accessBtn.click();
+                }
+            });
+
+
             // Event listener for the "Next" button (after entering the number of players)
             nextStepBtn.addEventListener('click', () => {
                 const playerCount = parseInt(playerCountInput.value, 10);
@@ -443,6 +481,11 @@
                 }
             });
 
+            // Listener per il nuovo pulsante "Back"
+            backBtn.addEventListener('click', () => {
+                showScreen('start-screen');
+            });
+
             // Event listener for the "Start game" button (after entering names)
             startGameBtn.addEventListener('click', () => {
                 const playerCount = parseInt(playerCountInput.value, 10);
@@ -450,7 +493,7 @@
                 let allNamesValid = true;
                 for (let i = 0; i < playerCount; i++) {
                     const nameInput = document.getElementById(`player-name-${i}`);
-                    const name = nameInput.value.trim();
+                    const name = nameInput.value.trim().toUpperCase(); // Nomi in maiuscolo
                     if (name === '') {
                         allNamesValid = false;
                         break;
@@ -476,7 +519,6 @@
                 }
             });
 
-            // Rimosso il gestore che nascondeva l'input. Ora il valore rimane visibile.
             // L'input accetta solo numeri grazie a type="number".
             playerBidInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
@@ -498,23 +540,19 @@
                 const bidValue = parseInt(playerBidInput.value, 10); // Legge il valore direttamente dall'input
 
                 if (playerBidInput.value.trim() === '' || isNaN(bidValue) || bidValue < 0) {
-                    showModal('Error', 'Enter a valid numeric value for the bid.');
-                    modalBtn.onclick = () => {
-                        hideModal();
+                    showModal('Error', 'Invalid bid, please enter a valid bid.', () => {
                         playerBidInput.value = '';
-                    };
+                    });
                     return;
                 }
 
                 bids.push({ playerId: currentPlayer.id, bid: bidValue });
                 // The `updatePlayerCard` line was removed from here to not show the bid immediately
 
-                showModal('Bid Submitted', `${currentPlayer.name}, your bid has been submitted. Pass to the next player.`);
-                modalBtn.onclick = () => {
-                    hideModal();
+                showModal('Bid Submitted', `${currentPlayer.name}, your bid has been submitted. Pass to the next player.`, () => {
                     playerTurnIndex++;
                     setBidPanelForCurrentPlayer();
-                };
+                });
             });
 
             downloadDataBtn.addEventListener('click', exportToExcel);
@@ -524,7 +562,7 @@
             });
 
             // Start the game
-            showScreen('start-screen');
+            showScreen('welcome-screen');
         });
     </script>
 </body>
