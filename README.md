@@ -1,3 +1,4 @@
+[Italiano](README.it.md)
 Puerto Banana – Rules (2–6 players) [Play - https://michele-aleandri.github.io/bid-banane/ ]
 
 
