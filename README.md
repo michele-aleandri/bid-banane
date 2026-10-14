@@ -44,3 +44,5 @@ End of the Game:
 - The game ends at the end of a round in which at least one player has 200+ stock.
 - The player(s) with the most bananas win.
 - Ties are shared victories.
+
+[At the end of the game you can download a file with the report of all the bids and payments.]
