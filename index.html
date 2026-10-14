@@ -18,48 +18,52 @@
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4 text-white">
 
-    <!-- Schermata di benvenuto con password -->
-    <div id="welcome-screen" class="flex flex-col items-center justify-center space-y-8 text-center min-h-screen">
-        <h1 class="text-6xl md:text-8xl bangers-font text-yellow-300 drop-shadow-lg">Games and Research</h1>
-        <div class="space-y-4">
-            <input type="password" id="password-input" placeholder="Enter password" class="p-2 w-full max-w-sm text-center rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-500">
-            <button id="access-btn" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
-                Proceed
+    <!-- Language selection screen / Schermata di scelta della lingua -->
+    <div id="language-screen" class="flex flex-col items-center justify-center space-y-8 text-center min-h-screen">
+        <h1 class="text-6xl md:text-8xl bangers-font text-yellow-300 drop-shadow-lg">PUERTO BANANA</h1>
+        <p class="text-xl md:text-2xl font-semibold">Choose your language / Scegli la lingua</p>
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <button id="lang-en-btn" class="px-8 py-4 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
+                🇬🇧 English
             </button>
+            <button id="lang-it-btn" class="px-8 py-4 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
+                🇮🇹 Italiano
+            </button>
+        </div>
+    </div>
+
+    <!-- Welcome screen with password -->
+    <div id="welcome-screen" class="hidden flex-col items-center justify-center space-y-8 text-center min-h-screen">
+        <h1 class="text-6xl md:text-8xl bangers-font text-yellow-300 drop-shadow-lg" data-i18n="gamesAndResearch"></h1>
+        <div class="space-y-4">
+            <input type="password" id="password-input" data-i18n-placeholder="passwordPlaceholder" class="p-2 w-full max-w-sm text-center rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-500">
+            <button id="access-btn" data-i18n="proceed" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200"></button>
         </div>
     </div>
 
     <!-- Start screen -->
     <div id="start-screen" class="hidden flex-col items-center justify-center space-y-8 text-center">
         <h1 class="text-6xl md:text-8xl bangers-font text-yellow-300 drop-shadow-lg">PUERTO BANANA</h1>
-        <p class="text-xl md:text-2xl max-w-2xl font-semibold">
-            Welcome to Puerto Banana! The docks are full of bananas and your goal is to load your ship to have more bananas than your opponents. Be shrewd and win the auctions!
-        </p>
+        <p class="text-xl md:text-2xl max-w-2xl font-semibold" data-i18n="welcomeText"></p>
         <div class="space-y-4">
             <div>
-                <label for="player-count" class="block text-lg font-semibold mb-2">Number of players (2-6):</label>
+                <label for="player-count" class="block text-lg font-semibold mb-2" data-i18n="playerCountLabel"></label>
                 <input type="number" id="player-count" value="2" min="2" max="6" class="p-2 w-24 text-center rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-500">
             </div>
-            <button id="next-step-btn" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
-                Next
-            </button>
+            <button id="next-step-btn" data-i18n="next" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200"></button>
         </div>
-        <p class="text-sm mt-4 text-gray-300">This website is non-profit and used for research purposes only.</p>
+        <p class="text-sm mt-4 text-gray-300" data-i18n="nonProfit"></p>
     </div>
 
     <!-- Name input screen -->
     <div id="name-input-screen" class="hidden flex-col items-center justify-center space-y-6 text-center w-full max-w-xl">
-        <h2 class="text-4xl bangers-font text-yellow-300 drop-shadow-lg">Enter player names</h2>
+        <h2 class="text-4xl bangers-font text-yellow-300 drop-shadow-lg" data-i18n="enterNames"></h2>
         <div id="name-inputs" class="w-full space-y-4">
             <!-- Inputs will be inserted here by JavaScript -->
         </div>
         <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <button id="back-btn" class="px-6 py-3 bg-gray-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-gray-500 transition-colors duration-200">
-                Back
-            </button>
-            <button id="start-game-btn" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
-                Start game
-            </button>
+            <button id="back-btn" data-i18n="back" class="px-6 py-3 bg-gray-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-gray-500 transition-colors duration-200"></button>
+            <button id="start-game-btn" data-i18n="startGame" class="px-6 py-3 bg-yellow-400 text-black text-xl font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200"></button>
         </div>
     </div>
 
@@ -68,13 +72,13 @@
 
         <!-- Top area: game info -->
         <div class="w-full flex justify-between items-center bg-blue-700 p-4 rounded-xl shadow-lg">
-            <h2 id="round-info" class="text-xl md:text-2xl font-bold">Round 1</h2>
+            <h2 id="round-info" class="text-xl md:text-2xl font-bold"></h2>
             <div class="text-lg md:text-xl font-bold flex items-center">
-                Bananas for auction:
+                <span data-i18n="bananasForAuction"></span>
                 <div id="bananas-for-auction" class="ml-2 px-4 py-2 bg-yellow-400 text-black rounded-lg shadow-inner">0</div>
             </div>
             <div class="text-sm md:text-base font-semibold">
-                Turn of: <span id="current-player-turn" class="font-bold"></span>
+                <span data-i18n="turnOfLabel"></span> <span id="current-player-turn" class="font-bold"></span>
             </div>
         </div>
 
@@ -87,12 +91,10 @@
         <div id="bid-panel" class="w-full flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 mt-6 p-6 bg-blue-700 rounded-xl shadow-lg">
             <h3 id="bid-player-name" class="text-xl font-bold md:w-1/3 text-center md:text-left"></h3>
             <div class="flex items-center space-x-2 md:w-1/3 justify-center">
-                <label for="player-bid" class="text-lg">Your bid:</label>
+                <label for="player-bid" class="text-lg" data-i18n="yourBid"></label>
                 <input type="number" id="player-bid" class="w-24 p-2 text-center rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-500" min="0" inputmode="numeric">
             </div>
-            <button id="submit-bid-btn" class="px-6 py-3 bg-yellow-400 text-black font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200 md:w-1/3">
-                Submit bid
-            </button>
+            <button id="submit-bid-btn" data-i18n="submitBid" class="px-6 py-3 bg-yellow-400 text-black font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200 md:w-1/3"></button>
         </div>
 
         <!-- Game message modal -->
@@ -100,9 +102,7 @@
             <div class="bg-blue-800 p-8 rounded-xl shadow-2xl text-center max-w-md w-full">
                 <h4 id="modal-title" class="text-3xl font-bold mb-4 bangers-font text-yellow-300"></h4>
                 <p id="modal-message" class="text-lg mb-6"></p>
-                <button id="modal-btn" class="px-6 py-3 bg-yellow-400 text-black font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
-                    Continue
-                </button>
+                <button id="modal-btn" data-i18n="continue" class="px-6 py-3 bg-yellow-400 text-black font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200"></button>
             </div>
         </div>
 
@@ -110,31 +110,158 @@
 
     <!-- End screen -->
     <div id="end-screen" class="hidden flex-col items-center text-center space-y-6">
-        <h2 class="text-5xl md:text-6xl bangers-font text-yellow-300 drop-shadow-lg">Game Over!</h2>
+        <h2 class="text-5xl md:text-6xl bangers-font text-yellow-300 drop-shadow-lg" data-i18n="gameOver"></h2>
         <div id="winners" class="text-2xl font-bold"></div>
         <div id="final-scores" class="w-full max-w-lg mt-4 bg-blue-700 p-6 rounded-xl shadow-lg">
-            <h3 class="text-xl font-bold mb-4">Final Scoreboard</h3>
+            <h3 class="text-xl font-bold mb-4" data-i18n="finalScoreboard"></h3>
             <ul id="score-list" class="space-y-2"></ul>
         </div>
         <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <button id="download-data-btn" class="px-6 py-3 bg-yellow-400 text-black font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200">
-                Export Data to Excel
-            </button>
-            <button id="restart-game-btn" class="px-6 py-3 bg-red-400 text-black font-bold rounded-full shadow-lg hover:bg-red-500 transition-colors duration-200">
-                Play Again
-            </button>
+            <button id="download-data-btn" data-i18n="exportData" class="px-6 py-3 bg-yellow-400 text-black font-bold rounded-full shadow-lg hover:bg-yellow-500 transition-colors duration-200"></button>
+            <button id="restart-game-btn" data-i18n="playAgain" class="px-6 py-3 bg-red-400 text-black font-bold rounded-full shadow-lg hover:bg-red-500 transition-colors duration-200"></button>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // ---------------------------------------------------------------
+            // Translations / Traduzioni
+            // ---------------------------------------------------------------
+            const TRANSLATIONS = {
+                en: {
+                    gamesAndResearch: 'Games and Research',
+                    passwordPlaceholder: 'Enter password',
+                    proceed: 'Proceed',
+                    welcomeText: 'Welcome to Puerto Banana! The docks are full of bananas and your goal is to load your ship to have more bananas than your opponents. Be shrewd and win the auctions!',
+                    playerCountLabel: 'Number of players (2-6):',
+                    next: 'Next',
+                    nonProfit: 'This website is non-profit and used for research purposes only.',
+                    enterNames: 'Enter player names',
+                    playerN: 'Player {n}:',
+                    namePlaceholder: 'Enter name',
+                    back: 'Back',
+                    startGame: 'Start game',
+                    roundN: 'Round {n}',
+                    bananasForAuction: 'Bananas for auction:',
+                    turnOfLabel: 'Turn of:',
+                    turnOfName: 'Turn of {name}',
+                    yourBid: 'Your bid:',
+                    submitBid: 'Submit bid',
+                    continue: 'Continue',
+                    gameOver: 'Game Over!',
+                    finalScoreboard: 'Final Scoreboard',
+                    exportData: 'Export Data to Excel',
+                    playAgain: 'Play Again',
+                    bananaStock: 'Banana Stock',
+                    lastBid: 'Last bid',
+                    notAvailable: 'N/A',
+                    removed: 'Removed',
+                    calculating: 'Calculating results...',
+                    roundResults: 'Round Results',
+                    error: 'Error',
+                    bidSubmitted: 'Bid Submitted',
+                    wrongPassword: 'Incorrect password. Please try again.',
+                    invalidPlayerCount: 'Enter a valid number of players (2 to 6).',
+                    namesRequired: 'Make sure to enter a name for each player.',
+                    invalidBid: 'Invalid bid, please enter a valid bid.',
+                    bidSubmittedMsg: '{name}, your bid has been submitted. Pass to the next player.',
+                    noValidBids: 'No valid bids this round. Bananas were not assigned.',
+                    tieMsg: 'Tie between {names}. Each receives {n} bananas. No bonus paid.',
+                    winnerMsg: 'The winner is {name} with a bid of {bid}. Receives {n} bananas. Will pay a bonus of {bonus}.',
+                    cannotPayMsg: '{name} cannot pay the bonus of {bonus} and is removed from the auction, losing all their stock.',
+                    cannotPayMsgTwoPlayers: '{name} cannot pay the bonus of {bonus} and is removed from the auction. Their stock stays the same.',
+                    lastPlayerMsg: '{name} is the last player remaining and wins all {n} bananas without a bonus.',
+                    noOnePaidMsg: 'No player could pay the bonus. The bananas were not assigned.',
+                    winnersTie: 'The winners are {names} with {n} bananas! (Tie)',
+                    winnerSingle: 'The winner is {name} with {n} bananas!',
+                    and: ' and ',
+                    bananasCount: '{n} bananas',
+                    csvHeader: ['Round', 'Bananas at stake', 'Player Name', 'Bid', 'Final Stock']
+                },
+                it: {
+                    gamesAndResearch: 'Giochi e Ricerca',
+                    passwordPlaceholder: 'Inserisci la password',
+                    proceed: 'Procedi',
+                    welcomeText: 'Benvenuto a Puerto Banana! Il porto è pieno di banane e il tuo obiettivo è caricare la nave per avere più banane dei tuoi avversari. Sii astuto e vinci le aste!',
+                    playerCountLabel: 'Numero di giocatori (2-6):',
+                    next: 'Avanti',
+                    nonProfit: 'Questo sito è senza scopo di lucro e utilizzato solo a fini di ricerca.',
+                    enterNames: 'Inserisci i nomi dei giocatori',
+                    playerN: 'Giocatore {n}:',
+                    namePlaceholder: 'Inserisci il nome',
+                    back: 'Indietro',
+                    startGame: 'Inizia la partita',
+                    roundN: 'Round {n}',
+                    bananasForAuction: 'Banane all\'asta:',
+                    turnOfLabel: 'Turno di:',
+                    turnOfName: 'Turno di {name}',
+                    yourBid: 'La tua offerta:',
+                    submitBid: 'Invia offerta',
+                    continue: 'Continua',
+                    gameOver: 'Fine della partita!',
+                    finalScoreboard: 'Classifica finale',
+                    exportData: 'Esporta i dati in Excel',
+                    playAgain: 'Gioca ancora',
+                    bananaStock: 'Stock di banane',
+                    lastBid: 'Ultima offerta',
+                    notAvailable: 'N/D',
+                    removed: 'Escluso',
+                    calculating: 'Calcolo dei risultati...',
+                    roundResults: 'Risultati del round',
+                    error: 'Errore',
+                    bidSubmitted: 'Offerta inviata',
+                    wrongPassword: 'Password errata. Riprova.',
+                    invalidPlayerCount: 'Inserisci un numero valido di giocatori (da 2 a 6).',
+                    namesRequired: 'Assicurati di inserire un nome per ogni giocatore.',
+                    invalidBid: 'Offerta non valida, inserisci un\'offerta valida.',
+                    bidSubmittedMsg: '{name}, la tua offerta è stata registrata. Passa al giocatore successivo.',
+                    noValidBids: 'Nessuna offerta valida in questo round. Le banane non sono state assegnate.',
+                    tieMsg: 'Pareggio tra {names}. Ognuno riceve {n} banane. Nessun bonus pagato.',
+                    winnerMsg: 'Il vincitore è {name} con un\'offerta di {bid}. Riceve {n} banane. Pagherà un bonus di {bonus}.',
+                    cannotPayMsg: '{name} non può pagare il bonus di {bonus} ed è escluso dall\'asta, perdendo tutto il suo stock.',
+                    cannotPayMsgTwoPlayers: '{name} non può pagare il bonus di {bonus} ed è escluso dall\'asta. Il suo stock rimane invariato.',
+                    lastPlayerMsg: '{name} è l\'ultimo giocatore rimasto e vince tutte le {n} banane senza bonus.',
+                    noOnePaidMsg: 'Nessun giocatore ha potuto pagare il bonus. Le banane non sono state assegnate.',
+                    winnersTie: 'I vincitori sono {names} con {n} banane! (Pareggio)',
+                    winnerSingle: 'Il vincitore è {name} con {n} banane!',
+                    and: ' e ',
+                    bananasCount: '{n} banane',
+                    csvHeader: ['Round', 'Banane in palio', 'Nome giocatore', 'Offerta', 'Stock finale']
+                }
+            };
+
+            let lang = 'en';
+
+            const t = (key, vars = {}) => {
+                const value = TRANSLATIONS[lang][key];
+                if (typeof value !== 'string') return value;
+                return value.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : `{${k}}`));
+            };
+
+            const applyLanguage = () => {
+                document.documentElement.lang = lang;
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    el.textContent = t(el.dataset.i18n);
+                });
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                    el.placeholder = t(el.dataset.i18nPlaceholder);
+                });
+            };
+
+            // ---------------------------------------------------------------
+            // Game state
+            // ---------------------------------------------------------------
             let players = [];
             let round = 0;
             let bids = [];
             let playerTurnIndex = 0;
             const history = [];
             const password = "200bananas"; // Password fissa
+            const REMOVED = 'REMOVED'; // internal marker, translated on display
 
+            const languageScreen = document.getElementById('language-screen');
+            const langEnBtn = document.getElementById('lang-en-btn');
+            const langItBtn = document.getElementById('lang-it-btn');
             const welcomeScreen = document.getElementById('welcome-screen');
             const passwordInput = document.getElementById('password-input');
             const accessBtn = document.getElementById('access-btn');
@@ -143,7 +270,7 @@
             const gameScreen = document.getElementById('game-screen');
             const endScreen = document.getElementById('end-screen');
             const nextStepBtn = document.getElementById('next-step-btn');
-            const backBtn = document.getElementById('back-btn'); // Nuovo pulsante
+            const backBtn = document.getElementById('back-btn');
             const startGameBtn = document.getElementById('start-game-btn');
             const playerCountInput = document.getElementById('player-count');
             const nameInputsContainer = document.getElementById('name-inputs');
@@ -177,18 +304,6 @@
                 localStorage.setItem('puertoBananaState', JSON.stringify({ players, round, bids, playerTurnIndex, history }));
             };
 
-            const loadState = () => {
-                const savedState = localStorage.getItem('puertoBananaState');
-                if (savedState) {
-                    const state = JSON.parse(savedState);
-                    players = state.players;
-                    round = state.round;
-                    bids = state.bids;
-                    playerTurnIndex = state.playerTurnIndex;
-                    history = state.history;
-                }
-            };
-
             const showModal = (title, message, callback) => {
                 modalTitle.textContent = title;
                 modalMessage.textContent = message;
@@ -204,10 +319,16 @@
             };
 
             const showScreen = (screenId) => {
-                [welcomeScreen, startScreen, nameInputScreen, gameScreen, endScreen].forEach(screen => {
+                [languageScreen, welcomeScreen, startScreen, nameInputScreen, gameScreen, endScreen].forEach(screen => {
                     screen.classList.add('hidden');
                 });
                 document.getElementById(screenId).classList.remove('hidden');
+            };
+
+            const formatLastBid = (value) => {
+                if (value === null || value === undefined) return t('notAvailable');
+                if (value === REMOVED) return t('removed');
+                return value;
             };
 
             const createPlayerCard = (player) => {
@@ -216,8 +337,8 @@
                 card.classList.add('bg-blue-900', 'p-6', 'rounded-xl', 'shadow-xl', 'text-center', 'space-y-4');
                 card.innerHTML = `
                     <h3 class="text-xl md:text-2xl font-bold italic" style="color: ${player.color};">${player.name}</h3>
-                    <div class="text-lg">Banana Stock: <span id="stock-${player.id}" class="font-bold text-yellow-400 text-3xl">${player.stock}</span></div>
-                    <div class="text-lg">Last bid: <span id="bid-${player.id}" class="font-bold">${player.lastBid !== null ? player.lastBid : 'N/A'}</span></div>
+                    <div class="text-lg">${t('bananaStock')}: <span id="stock-${player.id}" class="font-bold text-yellow-400 text-3xl">${player.stock}</span></div>
+                    <div class="text-lg">${t('lastBid')}: <span id="bid-${player.id}" class="font-bold">${formatLastBid(player.lastBid)}</span></div>
                 `;
                 return card;
             };
@@ -236,7 +357,7 @@
                 }
                 const bidEl = document.getElementById(`bid-${playerId}`);
                 if (bidEl) {
-                    bidEl.textContent = lastBid !== null ? lastBid : 'N/A';
+                    bidEl.textContent = formatLastBid(lastBid);
                 }
             };
 
@@ -255,7 +376,7 @@
                 });
 
                 round++;
-                roundInfo.textContent = `Round ${round}`;
+                roundInfo.textContent = t('roundN', { n: round });
                 bids = [];
                 const bananasForAuction = getHighestStock();
                 bananasForAuctionEl.textContent = bananasForAuction;
@@ -268,14 +389,14 @@
                 if (playerTurnIndex < players.length) {
                     const currentPlayer = players[playerTurnIndex];
                     bidPanel.classList.remove('hidden');
-                    bidPlayerName.textContent = `Turn of ${currentPlayer.name}`;
+                    bidPlayerName.textContent = t('turnOfName', { name: currentPlayer.name });
                     bidPlayerName.style.color = currentPlayer.color;
                     currentPlayerTurnEl.textContent = currentPlayer.name;
                     currentPlayerTurnEl.style.color = currentPlayer.color;
                     playerBidInput.value = '';
                 } else {
                     bidPanel.classList.add('hidden');
-                    currentPlayerTurnEl.textContent = 'Calculating results...';
+                    currentPlayerTurnEl.textContent = t('calculating');
                     currentPlayerTurnEl.style.color = '';
                     calculateResults();
                 }
@@ -284,20 +405,19 @@
             const calculateResults = () => {
                 const bananasForAuction = parseInt(bananasForAuctionEl.textContent);
                 let message = '';
-                
-                // Now considers bids >= 0 as valid
+
+                // Bids >= 0 are valid
                 let currentBids = bids.filter(b => b.bid >= 0);
-                
+
                 // Sort bids from highest to lowest
                 currentBids.sort((a, b) => b.bid - a.bid);
-                
-                // If all bids were invalid (e.g., negative, though the input prevents it)
+
                 if (currentBids.length === 0) {
-                    message = "No valid bids this round. Bananas were not assigned.";
-                    showModal('Round Results', message, checkEndGame);
+                    message = t('noValidBids');
+                    showModal(t('roundResults'), message, checkEndGame);
                     return;
                 }
-                
+
                 let roundMessage = '';
                 let auctionResolved = false;
 
@@ -309,25 +429,25 @@
                     if (highestBidders.length > 1) {
                         const winningPlayers = highestBidders.map(b => players.find(p => p.id === b.playerId));
                         const bananasPerPlayer = Math.floor(bananasForAuction / winningPlayers.length);
-                        
+
                         winningPlayers.forEach(p => {
                             p.stock += bananasPerPlayer;
                         });
-                        
-                        roundMessage += `Tie between ${winningPlayers.map(p => p.name).join(', ')}. Each receives ${bananasPerPlayer} bananas. No bonus paid.`;
+
+                        roundMessage += t('tieMsg', { names: winningPlayers.map(p => p.name).join(', '), n: bananasPerPlayer });
                         auctionResolved = true;
                         break;
                     }
-                    
+
                     const potentialWinnerBid = highestBidders[0];
                     const potentialWinner = players.find(p => p.id === potentialWinnerBid.playerId);
-                    
+
                     const secondHighestBidder = currentBids.length > 1 ? currentBids[1] : null;
                     const bonus = secondHighestBidder ? potentialWinnerBid.bid - secondHighestBidder.bid : 0;
-                    
+
                     // Add bananas at stake to the potential winner's stock for calculation
                     const potentialStockAfterWinnings = potentialWinner.stock + bananasForAuction;
-                    
+
                     if (potentialStockAfterWinnings >= bonus) {
                         // The winner can pay the bonus, the round is won
                         potentialWinner.stock = potentialStockAfterWinnings - bonus;
@@ -339,14 +459,18 @@
                                 player.stock += bonusPerPlayer;
                             });
                         }
-                        
-                        roundMessage += `The winner is ${potentialWinner.name} with a bid of ${potentialWinnerBid.bid}. Receives ${bananasForAuction} bananas. Will pay a bonus of ${bonus}.`;
+
+                        roundMessage += t('winnerMsg', { name: potentialWinner.name, bid: potentialWinnerBid.bid, n: bananasForAuction, bonus: bonus });
                         auctionResolved = true;
                     } else {
                         // The winner cannot pay the bonus
-                        roundMessage += `${potentialWinner.name} cannot pay the bonus of ${bonus} and is removed from the auction, losing all their stock.\n`;
-                        potentialWinner.stock = 0;
-                        potentialWinner.lastBid = 'Removed';
+                        // With 3-6 players the stock drops to 0; with 2 players it stays unchanged
+                        const loseStock = players.length > 2;
+                        roundMessage += t(loseStock ? 'cannotPayMsg' : 'cannotPayMsgTwoPlayers', { name: potentialWinner.name, bonus: bonus }) + '\n';
+                        if (loseStock) {
+                            potentialWinner.stock = 0;
+                        }
+                        potentialWinner.lastBid = REMOVED;
                         updatePlayerCard(potentialWinner.id, potentialWinner.stock, potentialWinner.lastBid);
                         currentBids = currentBids.filter(b => b.playerId !== potentialWinner.id);
 
@@ -354,15 +478,15 @@
                         if (currentBids.length === 1) {
                             const lastPlayer = players.find(p => p.id === currentBids[0].playerId);
                             lastPlayer.stock += bananasForAuction;
-                            roundMessage += `${lastPlayer.name} is the last player remaining and wins all ${bananasForAuction} bananas without a bonus.`;
+                            roundMessage += t('lastPlayerMsg', { name: lastPlayer.name, n: bananasForAuction });
                             auctionResolved = true;
                         } else if (currentBids.length === 0) {
-                            roundMessage += "No player could pay the bonus. The bananas were not assigned.";
+                            roundMessage += t('noOnePaidMsg');
                             auctionResolved = true;
                         }
                     }
                 }
-                
+
                 // Save round data to history
                 history.push({
                     round: round,
@@ -380,9 +504,8 @@
                 });
                 saveState();
 
-                showModal('Round Results', roundMessage, checkEndGame);
+                showModal(t('roundResults'), roundMessage, checkEndGame);
             };
-
 
             const checkEndGame = () => {
                 const gameEnded = players.some(p => p.stock >= 200);
@@ -400,9 +523,9 @@
                 const winners = sortedPlayers.filter(p => p.stock === winnerStock);
 
                 if (winners.length > 1) {
-                    winnersEl.textContent = `The winners are ${winners.map(p => p.name).join(' and ')} with ${winnerStock} bananas! (Tie)`;
+                    winnersEl.textContent = t('winnersTie', { names: winners.map(p => p.name).join(t('and')), n: winnerStock });
                 } else {
-                    winnersEl.textContent = `The winner is ${winners[0].name} with ${winnerStock} bananas!`;
+                    winnersEl.textContent = t('winnerSingle', { name: winners[0].name, n: winnerStock });
                 }
 
                 finalScoresList.innerHTML = '';
@@ -411,7 +534,7 @@
                     li.classList.add('flex', 'justify-between', 'items-center', 'font-semibold');
                     li.innerHTML = `
                         <span>${p.name}</span>
-                        <span class="text-yellow-400">${p.stock} bananas</span>
+                        <span class="text-yellow-400">${t('bananasCount', { n: p.stock })}</span>
                     `;
                     finalScoresList.appendChild(li);
                 });
@@ -419,9 +542,9 @@
             };
 
             const exportToExcel = () => {
-                const header = ["Round", "Bananas at stake", "Player Name", "Bid", "Final Stock"];
+                const header = t('csvHeader');
                 let csvContent = header.join(";") + "\n";
-                
+
                 history.forEach(roundData => {
                     const bananasForAuction = roundData.bananasForAuction;
                     roundData.bids.forEach(bid => {
@@ -430,7 +553,8 @@
                     });
                 });
 
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                // BOM so Excel reads accented characters correctly
+                const blob = new Blob(["\uFEFF" + csvContent], { type: 'text/csv;charset=utf-8;' });
                 const link = document.createElement('a');
                 const url = URL.createObjectURL(blob);
                 link.setAttribute('href', url);
@@ -440,19 +564,29 @@
                 document.body.removeChild(link);
             };
 
-            // Listener per il pulsante di accesso
+            // Language selection
+            const chooseLanguage = (selected) => {
+                lang = selected;
+                applyLanguage();
+                showScreen('welcome-screen');
+                passwordInput.focus();
+            };
+            langEnBtn.addEventListener('click', () => chooseLanguage('en'));
+            langItBtn.addEventListener('click', () => chooseLanguage('it'));
+
+            // Access button
             accessBtn.addEventListener('click', () => {
                 if (passwordInput.value === password) {
                     showScreen('start-screen');
                 } else {
-                    showModal('Error', 'Incorrect password. Please try again.', () => {
+                    showModal(t('error'), t('wrongPassword'), () => {
                         passwordInput.value = '';
                         passwordInput.focus();
                     });
                 }
             });
 
-            // Listener per il tasto Invio nell'input della password
+            // Enter key in the password input
             passwordInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -460,8 +594,7 @@
                 }
             });
 
-
-            // Event listener for the "Next" button (after entering the number of players)
+            // "Next" button (after entering the number of players)
             nextStepBtn.addEventListener('click', () => {
                 const playerCount = parseInt(playerCountInput.value, 10);
                 if (playerCount >= 2 && playerCount <= 6) {
@@ -471,29 +604,29 @@
                         const div = document.createElement('div');
                         div.classList.add('flex', 'flex-col', 'sm:flex-row', 'items-center', 'sm:justify-between');
                         div.innerHTML = `
-                            <label for="player-name-${i}" class="text-lg mb-1 sm:mb-0 sm:mr-4">Player ${i + 1}:</label>
-                            <input type="text" id="player-name-${i}" placeholder="Enter name" class="p-2 w-full sm:w-64 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                            <label for="player-name-${i}" class="text-lg mb-1 sm:mb-0 sm:mr-4">${t('playerN', { n: i + 1 })}</label>
+                            <input type="text" id="player-name-${i}" placeholder="${t('namePlaceholder')}" class="p-2 w-full sm:w-64 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-yellow-500">
                         `;
                         nameInputsContainer.appendChild(div);
                     }
                 } else {
-                    showModal('Error', 'Enter a valid number of players (2 to 6).');
+                    showModal(t('error'), t('invalidPlayerCount'));
                 }
             });
 
-            // Listener per il nuovo pulsante "Back"
+            // "Back" button
             backBtn.addEventListener('click', () => {
                 showScreen('start-screen');
             });
 
-            // Event listener for the "Start game" button (after entering names)
+            // "Start game" button (after entering names)
             startGameBtn.addEventListener('click', () => {
                 const playerCount = parseInt(playerCountInput.value, 10);
                 players = [];
                 let allNamesValid = true;
                 for (let i = 0; i < playerCount; i++) {
                     const nameInput = document.getElementById(`player-name-${i}`);
-                    const name = nameInput.value.trim().toUpperCase(); // Nomi in maiuscolo
+                    const name = nameInput.value.trim().toUpperCase(); // Names in uppercase
                     if (name === '') {
                         allNamesValid = false;
                         break;
@@ -515,19 +648,19 @@
                     showScreen('game-screen');
                     newRound();
                 } else {
-                    showModal('Error', 'Make sure to enter a name for each player.');
+                    showModal(t('error'), t('namesRequired'));
                 }
             });
 
-            // L'input accetta solo numeri grazie a type="number".
+            // Enter key in the bid input
             playerBidInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
-                    e.preventDefault(); // Prevents form submission
-                    submitBidBtn.click(); // Simulates button click
+                    e.preventDefault();
+                    submitBidBtn.click();
                 }
             });
 
-            // Adds "Enter" key functionality to the modal
+            // Enter key also closes the modal
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' && !gameMessageModal.classList.contains('hidden')) {
                     e.preventDefault();
@@ -537,19 +670,18 @@
 
             submitBidBtn.addEventListener('click', () => {
                 const currentPlayer = players[playerTurnIndex];
-                const bidValue = parseInt(playerBidInput.value, 10); // Legge il valore direttamente dall'input
+                const bidValue = parseInt(playerBidInput.value, 10);
 
                 if (playerBidInput.value.trim() === '' || isNaN(bidValue) || bidValue < 0) {
-                    showModal('Error', 'Invalid bid, please enter a valid bid.', () => {
+                    showModal(t('error'), t('invalidBid'), () => {
                         playerBidInput.value = '';
                     });
                     return;
                 }
 
                 bids.push({ playerId: currentPlayer.id, bid: bidValue });
-                // The `updatePlayerCard` line was removed from here to not show the bid immediately
 
-                showModal('Bid Submitted', `${currentPlayer.name}, your bid has been submitted. Pass to the next player.`, () => {
+                showModal(t('bidSubmitted'), t('bidSubmittedMsg', { name: currentPlayer.name }), () => {
                     playerTurnIndex++;
                     setBidPanelForCurrentPlayer();
                 });
@@ -561,8 +693,9 @@
                 window.location.reload();
             });
 
-            // Start the game
-            showScreen('welcome-screen');
+            // Start with the language selection
+            applyLanguage();
+            showScreen('language-screen');
         });
     </script>
 </body>
