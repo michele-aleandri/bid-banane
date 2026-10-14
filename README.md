@@ -1,4 +1,6 @@
-Puerto Banana – Rules (2–6 players)
+Puerto Banana – Rules (2–6 players) [Play - https://michele-aleandri.github.io/bid-banane/ ]
+
+
 
 Goal:
 Be the first player to reach 200 bananas (stock points). If multiple players reach 200+ in the same round, they share the victory.
